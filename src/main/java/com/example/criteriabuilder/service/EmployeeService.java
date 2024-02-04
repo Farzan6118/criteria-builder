@@ -30,7 +30,6 @@ public class EmployeeService {
     public List<Object> criteriaSampleOne() {
 
         //select all records
-        System.out.println("Select all records");
         TypedQuery<Object> typedQuery = entityManager.createQuery(select);
         return typedQuery.getResultList();
     }
@@ -38,7 +37,6 @@ public class EmployeeService {
     public List<Object> criteriaSampleTwo() {
 
         //Ordering the records
-        System.out.println("Select all records by follow ordering");
         CriteriaQuery<Object> select1 = criteriaQuery.select(from);
         select1.orderBy(criteriaBuilder.asc(from.get("salary")));
         TypedQuery<Object> typedQuery1 = entityManager.createQuery(select);
