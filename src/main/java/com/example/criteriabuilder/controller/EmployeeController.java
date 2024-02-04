@@ -14,7 +14,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("test")
+    @GetMapping("testOne")
     public void test(){
         employeeService.criteriaSampleOne();
     }
