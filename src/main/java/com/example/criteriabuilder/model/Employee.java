@@ -4,6 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+
+import java.time.LocalDateTime;
 
 @Entity
 public class Employee {
@@ -15,7 +19,30 @@ public class Employee {
     private String lastName;
     private String phoneNumber;
     private String nationalCode;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime joinDateTime;
+    //    @Email
+    private String email;
+    @NumberFormat(style = NumberFormat.Style.CURRENCY)
     private Double salary;
+
+    public LocalDateTime getJoinDateTime() {
+        return joinDateTime;
+    }
+
+    public Employee setJoinDateTime(LocalDateTime joinDateTime) {
+        this.joinDateTime = joinDateTime;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Employee setEmail(String email) {
+        this.email = email;
+        return this;
+    }
 
     public Integer getId() {
         return id;

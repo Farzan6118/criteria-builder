@@ -1,5 +1,6 @@
 package com.example.criteriabuilder.controller;
 
+import com.example.criteriabuilder.model.Employee;
 import com.example.criteriabuilder.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,15 +21,27 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("testOne")
-    public List<Object> testOne() {
+    @GetMapping("selectAll")
+    public List<Employee> selectAll() {
         logger.info("Select all records");
-        return employeeService.criteriaSampleOne();
+        return employeeService.selectAll();
     }
 
-    @GetMapping("testTwo")
-    public List<Object> testTwo() {
-        logger.info("Select all records by salary order");
-        return employeeService.criteriaSampleTwo();
+    @GetMapping("orderBySalary")
+    public List<Employee> orderBySalary() {
+        logger.info("Select all records by 'salary' order");
+        return employeeService.orderBySalary();
     }
+    @GetMapping("orderById")
+    public List<Employee> orderById() {
+        logger.info("Select all records by 'id' order");
+        return employeeService.orderById();
+    }
+    @GetMapping("orderByIdBiggerThan5")
+    public List<Employee> orderByIdBiggerThan5() {
+        logger.info("Select all records by 'id' order");
+        return employeeService.orderByIdBiggerThan5();
+    }
+
+
 }

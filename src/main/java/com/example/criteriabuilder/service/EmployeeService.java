@@ -15,38 +15,49 @@ import java.util.List;
 public class EmployeeService {
     private final EntityManager entityManager;
     private final CriteriaBuilder criteriaBuilder;
-    private final CriteriaQuery<Object> criteriaQuery;
-    private final CriteriaQuery<Object> select;
+    private final CriteriaQuery<Employee> criteriaQuery;
+    private final CriteriaQuery<Employee> select;
     private final Root<Employee> from;
 
     public EmployeeService(EntityManager entityManager) {
         this.entityManager = entityManager;
         criteriaBuilder = entityManager.getCriteriaBuilder();
-        criteriaQuery = criteriaBuilder.createQuery();
+        criteriaQuery = criteriaBuilder.createQuery(Employee.class);
         from = criteriaQuery.from(Employee.class);
         select = criteriaQuery.select(from);
     }
 
-    public List<Object> criteriaSampleOne() {
-
+    public List<Employee> selectAll() {
         //select all records
-        TypedQuery<Object> typedQuery = entityManager.createQuery(select);
+        TypedQuery<Employee> typedQuery = entityManager.createQuery(select);
         return typedQuery.getResultList();
     }
 
-    public List<Object> criteriaSampleTwo() {
-
+    public List<Employee> orderBySalary() {
         //Ordering the records
-        CriteriaQuery<Object> select1 = criteriaQuery.select(from);
+        CriteriaQuery<Employee> select1 = criteriaQuery.select(from);
         select1.orderBy(criteriaBuilder.asc(from.get("salary")));
-        TypedQuery<Object> typedQuery1 = entityManager.createQuery(select);
+        TypedQuery<Employee> typedQuery1 = entityManager.createQuery(select);
         return typedQuery1.getResultList();
+    }
 
+    public List<Employee> orderById() {
+        //Ordering the records
+        CriteriaQuery<Employee> select1 = criteriaQuery.select(from);
+        select1.orderBy(criteriaBuilder.asc(from.get("id")));
+        TypedQuery<Employee> typedQuery1 = entityManager.createQuery(select);
+        return typedQuery1.getResultList();
+    }
+
+    public List<Employee> orderByIdBiggerThan5() {
+        //Ordering the records
+        CriteriaQuery<Employee> select1 = criteriaQuery.select(from).where(criteriaBuilder.gt(from.get("id"), 5));
+        TypedQuery<Employee> typedQuery1 = entityManager.createQuery(select1);
+        return typedQuery1.getResultList();
     }
 
     @PreDestroy
     private void closeEntityManager() {
         entityManager.close();
-
     }
 }
