@@ -1,6 +1,7 @@
 package com.example.criteriabuilder.service;
 
 import com.example.criteriabuilder.model.Employee;
+import jakarta.annotation.PreDestroy;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -12,40 +13,42 @@ import java.util.List;
 
 @Service
 public class EmployeeService {
-
     private final EntityManager entityManager;
+    private final CriteriaBuilder criteriaBuilder;
+    private final CriteriaQuery<Object> criteriaQuery;
+    private final CriteriaQuery<Object> select;
+    private final Root<Employee> from;
 
     public EmployeeService(EntityManager entityManager) {
         this.entityManager = entityManager;
+        criteriaBuilder = entityManager.getCriteriaBuilder();
+        criteriaQuery = criteriaBuilder.createQuery();
+        from = criteriaQuery.from(Employee.class);
+        select = criteriaQuery.select(from);
     }
 
-    public Employee criteriaSampleOne() {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Object> criteriaQuery = criteriaBuilder.createQuery();
-        Root<Employee> from = criteriaQuery.from(Employee.class);
+    public List<Object> criteriaSampleOne() {
+
         //select all records
         System.out.println("Select all records");
-        CriteriaQuery<Object> select = criteriaQuery.select(from);
         TypedQuery<Object> typedQuery = entityManager.createQuery(select);
-        List<Object> resultlist = typedQuery.getResultList();
+        return typedQuery.getResultList();
+    }
 
-        for (Object o : resultlist) {
-            Employee e = (Employee) o;
-            System.out.println("ID : " + e.getId() + " firstName : " + e.getFirstName());
-        }
+    public List<Object> criteriaSampleTwo() {
 
         //Ordering the records
         System.out.println("Select all records by follow ordering");
         CriteriaQuery<Object> select1 = criteriaQuery.select(from);
-        select1.orderBy(criteriaBuilder.asc(from.get("firstName")));
+        select1.orderBy(criteriaBuilder.asc(from.get("salary")));
         TypedQuery<Object> typedQuery1 = entityManager.createQuery(select);
-        List<Object> resultlist1 = typedQuery1.getResultList();
+        return typedQuery1.getResultList();
 
-        for (Object o : resultlist1) {
-            Employee e = (Employee) o;
-            System.out.println("ID : " + e.getId() + " firstName : " + e.getFirstName());
-        }
+    }
+
+    @PreDestroy
+    private void closeEntityManager() {
         entityManager.close();
-        return null;
+
     }
 }

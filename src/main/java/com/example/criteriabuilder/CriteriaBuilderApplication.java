@@ -25,7 +25,7 @@ public class CriteriaBuilderApplication implements CommandLineRunner {
     @Override
     public void run(String... args) {
         List<Employee> employeeList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             employeeList.add(Instancio.create(Employee.class));
         }
         employeeRepository.saveAll(employeeList);
