@@ -32,14 +32,16 @@ public class EmployeeController {
         logger.info("Select all records by 'salary' order");
         return employeeService.orderBySalary();
     }
+
     @GetMapping("orderById")
     public List<Employee> orderById() {
         logger.info("Select all records by 'id' order");
         return employeeService.orderById();
     }
+
     @GetMapping("orderByIdBiggerThan5")
     public List<Employee> orderByIdBiggerThan5() {
-        logger.info("Select all records by 'id' order");
+        logger.info("Select all records by 'id' bigger than 5");
         return employeeService.orderByIdBiggerThan5();
     }
 

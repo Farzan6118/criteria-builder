@@ -3,7 +3,6 @@ package com.example.criteriabuilder;
 import com.example.criteriabuilder.model.Employee;
 import com.example.criteriabuilder.repository.EmployeeRepository;
 import org.instancio.Instancio;
-import org.instancio.Model;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,7 +27,7 @@ public class CriteriaBuilderApplication implements CommandLineRunner {
     @Override
     public void run(String... args) {
         List<Employee> employeeList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             employeeList.add(Instancio.of(Employee.class)
                     .generate(field("firstName"), gen -> gen.text().pattern("#C#c#c#c#c#c#c#c#c"))
                     .generate(field("lastName"), gen -> gen.text().pattern("#C#c#c#c#c#c#c#c#c"))
