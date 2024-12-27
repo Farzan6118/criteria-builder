@@ -1,6 +1,6 @@
-package com.example.criteriabuilder.service;
+package com.example.criteria_api.service;
 
-import com.example.criteriabuilder.model.Employee;
+import com.example.criteria_api.model.Employee;
 import jakarta.annotation.PreDestroy;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;

@@ -1,10 +1,10 @@
-package com.example.criteriabuilder;
+package com.example.criteria_api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CriteriaBuilderApplicationTests {
+class ApplicationLauncherTests {
 
     @Test
     void contextLoads() {

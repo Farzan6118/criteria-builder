@@ -1,7 +1,7 @@
-package com.example.criteriabuilder.controller;
+package com.example.criteria_api.controller;
 
-import com.example.criteriabuilder.model.Employee;
-import com.example.criteriabuilder.service.EmployeeService;
+import com.example.criteria_api.model.Employee;
+import com.example.criteria_api.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
